@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const OnboardingButtons = ({ onSkip, onNext, isLast = false }) => {
+const OnboardingButtons = ({ onSkip, onNext, onStart, isLast = false }) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -10,7 +10,10 @@ const OnboardingButtons = ({ onSkip, onNext, isLast = false }) => {
       {!isLast && (
         <View style={styles.row}>
           <TouchableOpacity
-            onPress={onSkip}
+            onPress={() => {
+              if (onSkip) return onSkip();
+              if (onStart) return onStart();
+            }}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Text style={styles.skipText}>Skip</Text>
@@ -24,7 +27,7 @@ const OnboardingButtons = ({ onSkip, onNext, isLast = false }) => {
 
       {/* LAST SCREEN ONLY: Centered Start Care */}
       {isLast && (
-        <TouchableOpacity onPress={onNext} style={styles.centerBtn}>
+        <TouchableOpacity onPress={onStart} style={styles.centerBtn}>
           <Text style={styles.centerText}>Start Care</Text>
         </TouchableOpacity>
       )}

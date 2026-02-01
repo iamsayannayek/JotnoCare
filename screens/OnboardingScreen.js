@@ -14,7 +14,7 @@ const OnboardingScreen = () => {
 
   const pages = [
     {
-      backgroundColor: "#e6ecff",
+      backgroundColor: "#f2f6d0",
       image: (
         <LottieView
           style={styles.lottie}
@@ -42,7 +42,7 @@ const OnboardingScreen = () => {
         "Smart reminders and schedules to keep your treatment on track, every day",
     },
     {
-      backgroundColor: "#fdd2f7",
+      backgroundColor: "#ffc1cc",
       image: (
         <LottieView
           style={styles.lottie}
@@ -58,7 +58,9 @@ const OnboardingScreen = () => {
   ];
 
   const handleDone = () => {
-    navigation.replace("Home");
+    // Use navigate instead of replace to avoid dispatching a REPLACE action
+    // that may target a route not present in the current navigator
+    navigation.replace("Login");
   };
 
   const handleSkip = () => {
@@ -91,11 +93,15 @@ const OnboardingScreen = () => {
         showDone={false}
         pageIndexCallback={(index) => setCurrentIndex(index)}
         pages={pages}
+        containerStyles={{ paddingHorizontal: 18 }}
+        titleStyles={{ fontSize: 30, fontWeight: "700" }}
+        subTitleStyles={{ fontSize: 16, color: "#333" }}
       />
 
       <OnboardingButtons
         onSkip={handleSkip}
         onNext={handleNext}
+        onStart={handleDone}
         isLast={currentIndex === pages.length - 1}
       />
     </View>
