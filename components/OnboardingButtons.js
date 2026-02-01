@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     paddingVertical: 14,
     borderRadius: 30,
-    marginBottom: 30,
+    marginBottom: 18,
   },
   centerText: {
     color: "#fff",

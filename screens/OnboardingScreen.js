@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
+import { setItem } from "../util/onboardedAsyncStorage";
 import OnboardingButtons from "../components/OnboardingButtons";
 
 const { width } = Dimensions.get("window");
@@ -61,6 +62,7 @@ const OnboardingScreen = () => {
     // Use navigate instead of replace to avoid dispatching a REPLACE action
     // that may target a route not present in the current navigator
     navigation.replace("Login");
+    setItem("onboarded", "1");
   };
 
   const handleSkip = () => {
