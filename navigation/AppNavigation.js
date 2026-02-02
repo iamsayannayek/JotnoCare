@@ -18,6 +18,8 @@ import SignupScreen from "../screens/SignupScreen";
 
 //App Actual Screens
 import Home from "../screens/Home";
+import NativeScreenNavigation from "./NativeScreenNavigation";
+
 import { AuthContext } from "../store/AuthContext";
 import { getItem } from "../util/onboardedAsyncStorage";
 
@@ -116,17 +118,10 @@ function AuthenticatedStack() {
       }}
     >
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="NativeScreenNavigation"
+        component={NativeScreenNavigation}
         options={{
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="exit"
-              color={tintColor}
-              size={24}
-              onPress={authCtx.logout}
-            />
-          ),
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
