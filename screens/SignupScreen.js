@@ -11,6 +11,7 @@ function SignupScreen() {
   const authCtx = useContext(AuthContext);
 
   async function signUpHandler({ email, password }) {
+    // receiving email generated from SignupForm (phone->email) and password
     setIsAuthenticating(true);
     try {
       const token = await createUser(email, password);
@@ -27,7 +28,7 @@ function SignupScreen() {
     return <LoadingOverlay message="Creating user..." />;
   }
 
-  return <AuthContent onAuthenticate={signUpHandler} />;
+  return <AuthContent isLogin={false} onAuthenticate={signUpHandler} />;
 }
 
 export default SignupScreen;
