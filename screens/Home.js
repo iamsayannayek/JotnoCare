@@ -1,10 +1,18 @@
 import { View, Text, StyleSheet } from "react-native";
+import Greetings from "../components/Home/Greetings";
+import SymptomsQuery from "../components/Home/SymptomsQuery";
 
 const Home = () => {
   return (
     <View style={styles.rootContainer}>
-      <Text style={styles.title}>Welcome!</Text>
-      <Text>You authenticated successfully!</Text>
+      {/* Greetings */}
+      <View>
+        <Greetings />
+      </View>
+      {/* Query on Symptoms */}
+      <View>
+        <SymptomsQuery />
+      </View>
     </View>
   );
 };
@@ -12,14 +20,8 @@ const Home = () => {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 32,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 8,
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 });
 
