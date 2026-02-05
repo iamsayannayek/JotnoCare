@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
 const Greetings = ({ username = "Sayan" }) => {
   const getGreeting = () => {
     const hour = new Date().getHours();
 
-    if (hour < 12) return "Good Morning";
-    if (hour < 18) return "Good Afternoon";
-    return "Good Evening";
+    if (hour >= 5 && hour < 12) {
+      return "Good Morning";
+    } else if (hour >= 12 && hour < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening"; // This handles 6 PM to 4 AM
+    }
   };
 
   return (
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent", // Or match your screen bg
   },
   greetingText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "600",
     color: "#2b67cb", // The specific blue from your reference image
     marginBottom: 4,

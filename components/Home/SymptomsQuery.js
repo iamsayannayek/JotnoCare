@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: "center", // Center text and buttons
   },
   questionText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
     color: "#000",
     textAlign: "center",
