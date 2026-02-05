@@ -17,11 +17,11 @@ import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
 
 //App Actual Screens
-import Home from "../screens/Home";
 import NativeScreenNavigation from "./NativeScreenNavigation";
 
 import { AuthContext } from "../store/AuthContext";
 import { getItem } from "../util/onboardedAsyncStorage";
+import MedicationStack from "./MedicationStack";
 
 const Stack = createStackNavigator();
 
@@ -120,6 +120,13 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="NativeScreenNavigation"
         component={NativeScreenNavigation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MedicationStack"
+        component={MedicationStack}
         options={{
           headerShown: false,
         }}

@@ -94,8 +94,9 @@ const NativeScreenNavigation = () => {
       <Tab.Screen
         name="Home"
         component={Home}
-        options={{ headerShown: false, headerTitle: "Hey there 👋" }}
+        options={{ headerShown: false }}
       />
+
       {/* For other screens, we might want the default header back, 
           or you can create custom headers for them too. 
           For now, I'll enable the default header for non-Home screens 

@@ -5,8 +5,11 @@ import Greetings from "../components/Home/Greetings";
 import SymptomsQuery from "../components/Home/SymptomsQuery";
 import Categories from "../components/Home/Categories";
 import VitalsSection from "../components/Home/VitalsSection";
+import { Use } from "react-native-svg";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
+  // const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <StatusBar backgroundColor="#f9f9f9" barStyle="dark-content" />

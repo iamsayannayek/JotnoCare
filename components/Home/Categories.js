@@ -5,8 +5,10 @@ import {
   FontAwesome5,
   MaterialIcons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Categories = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Choose from the categories</Text>
@@ -19,6 +21,11 @@ const Categories = () => {
               styles.iconCircle,
               pressed && styles.pressed,
             ]}
+            onPress={() =>
+              navigation.navigate("MedicationStack", {
+                screen: "AddMedication",
+              })
+            }
           >
             <View style={styles.combinedIconContainer}>
               <MaterialCommunityIcons
