@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppNavigation from "./navigation/AppNavigation";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context"; // 1. Import this
+
+// Import Store
+import AuthContextProvider, { AuthContext } from "./store/AuthContext";
+import { useContext, useEffect } from "react";
+
+function Root() {
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+    }
+    fetchToken();
+  }, []);
+
+  return <AppNavigation />;
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    /* 2. Wrap everything in SafeAreaProvider */
+    <SafeAreaProvider>
+      <AuthContextProvider>
+        <StatusBar style="auto" />
+        <Root />
+      </AuthContextProvider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
