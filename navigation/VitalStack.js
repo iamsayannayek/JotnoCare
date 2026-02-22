@@ -9,6 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useNavigation } from "@react-navigation/native";
 
 const VitalStack = () => {
@@ -24,6 +25,10 @@ const VitalStack = () => {
     weight: "",
   });
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisible] = useState(false);
+
   const handleInputChange = (key, value) => {
     setVitals((prev) => ({ ...prev, [key]: value }));
   };
@@ -37,6 +42,21 @@ const VitalStack = () => {
     const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
     return `${d}/${m}/${y} ${hours}:${minutes} ${ampm}`;
+  };
+
+  const formatDateOnly = (date) => {
+    const d = date.getDate().toString().padStart(2, "0");
+    const m = (date.getMonth() + 1).toString().padStart(2, "0");
+    const y = date.getFullYear();
+    return `${d}/${m}/${y}`;
+  };
+
+  const formatTimeOnly = (date) => {
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${ampm}`;
   };
 
   const handleDone = () => {
@@ -60,8 +80,52 @@ const VitalStack = () => {
             <Feather name="clock" size={20} color="black" />
             <Text style={styles.selectTimeText}>Select Time:</Text>
           </View>
-          <Text style={styles.dateTimeValue}>{formatDate(new Date())}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity onPress={() => setDatePickerVisible(true)}>
+              <Text style={styles.dateTimeValue}>
+                {formatDateOnly(selectedDate)}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setTimePickerVisible(true)}
+              style={{ marginLeft: 12 }}
+            >
+              <Text style={styles.dateTimeValue}>
+                {formatTimeOnly(selectedDate)}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          date={selectedDate}
+          onConfirm={(date) => {
+            setDatePickerVisible(false);
+            const newDate = new Date(selectedDate);
+            newDate.setFullYear(
+              date.getFullYear(),
+              date.getMonth(),
+              date.getDate(),
+            );
+            setSelectedDate(newDate);
+          }}
+          onCancel={() => setDatePickerVisible(false)}
+        />
+
+        <DateTimePickerModal
+          isVisible={isTimePickerVisible}
+          mode="time"
+          date={selectedDate}
+          onConfirm={(date) => {
+            setTimePickerVisible(false);
+            const newDate = new Date(selectedDate);
+            newDate.setHours(date.getHours(), date.getMinutes());
+            setSelectedDate(newDate);
+          }}
+          onCancel={() => setTimePickerVisible(false)}
+        />
 
         <View style={styles.inputSection}>
           <View style={styles.inputRow}>
